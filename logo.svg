@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="120" height="120">
+  <defs>
+    <linearGradient id="t" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#2a5bd8"/><stop offset=".55" stop-color="#0d2a73"/><stop offset="1" stop-color="#071a4a"/></linearGradient>
+    <linearGradient id="r" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".8"/><stop offset=".4" stop-color="#9fd0ff" stop-opacity=".14"/><stop offset=".7" stop-color="#9fd0ff" stop-opacity=".1"/><stop offset="1" stop-color="#fff" stop-opacity=".5"/></linearGradient>
+    <linearGradient id="s" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#e2f7ff"/><stop offset=".5" stop-color="#6cc4ff"/><stop offset="1" stop-color="#3a7bff"/></linearGradient>
+    <linearGradient id="g" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".4"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient>
+    <clipPath id="c"><rect x="4" y="4" width="112" height="112" rx="34"/></clipPath>
+    <filter id="f" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="2.4" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+  </defs>
+  <rect x="4" y="4" width="112" height="112" rx="34" fill="url(#t)"/>
+  <ellipse cx="60" cy="-6" rx="82" ry="58" fill="url(#g)" clip-path="url(#c)"/>
+  <rect x="4" y="4" width="112" height="112" rx="34" fill="none" stroke="url(#r)" stroke-width="1.6"/>
+  <path d="M34 22H86a16 16 0 0 1 16 16V68a16 16 0 0 1-16 16H58L40 100V84H34a16 16 0 0 1-16-16V38a16 16 0 0 1 16-16Z" fill="rgba(180,215,255,.10)" stroke="rgba(220,238,255,.6)" stroke-width="2.4" stroke-linejoin="round"/>
+  <path d="M80 40C70 32 44 32 44 46C44 58 76 52 76 64C76 76 48 76 40 68" fill="none" stroke="url(#s)" stroke-width="8.5" stroke-linecap="round" filter="url(#f)"/>
+  <circle cx="91" cy="34" r="3.6" fill="#d9f4ff"/>
+</svg>

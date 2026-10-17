@@ -1,0 +1,299 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#040c22">
+<title>Svipe</title>
+<link rel="icon" href="logo.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700&family=Unbounded:wght@500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="bg" aria-hidden="true">
+  <i class="orb o1"></i><i class="orb o2"></i><i class="orb o3"></i>
+  <i class="streak st1"></i><i class="streak st2"></i><i class="streak st3"></i>
+</div>
+
+<!-- ===== стартовый экран ===== -->
+<main class="stage" id="start" hidden>
+  <section class="hero">
+    <div class="visual">
+      <div class="chat glass a">
+        <span class="av">А</span>
+        <p>Ты где? Я уже у входа</p>
+        <time data-now="-1">14:24</time>
+      </div>
+      <div class="chat glass b">
+        <p>Лечу, буду через 2 минуты</p>
+        <time data-now="0">14:25</time>
+        <svg width="16" height="10" viewBox="0 0 16 10" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M1 5.5 4.2 8.5 10 1.5"/><path d="M6.5 7.5 7.2 8.5 15 1.5"/></svg>
+      </div>
+      <div class="chat glass c" aria-hidden="true"><i></i><i></i><i></i></div>
+
+      <div class="mark">
+        <span class="ring"></span><span class="ring r2"></span>
+        <svg class="logo" viewBox="0 0 120 120" role="img" aria-label="Логотип Svipe">
+          <defs>
+            <linearGradient id="svTile" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0" stop-color="#2a5bd8"/><stop offset=".55" stop-color="#0d2a73"/><stop offset="1" stop-color="#071a4a"/>
+            </linearGradient>
+            <linearGradient id="svRim" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0" stop-color="#fff" stop-opacity=".8"/><stop offset=".4" stop-color="#9fd0ff" stop-opacity=".14"/>
+              <stop offset=".7" stop-color="#9fd0ff" stop-opacity=".1"/><stop offset="1" stop-color="#fff" stop-opacity=".5"/>
+            </linearGradient>
+            <linearGradient id="svSwipe" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0" stop-color="#e2f7ff"/><stop offset=".5" stop-color="#6cc4ff"/><stop offset="1" stop-color="#3a7bff"/>
+            </linearGradient>
+            <linearGradient id="svGloss" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#fff" stop-opacity=".4"/><stop offset="1" stop-color="#fff" stop-opacity="0"/>
+            </linearGradient>
+            <clipPath id="svClip"><rect x="4" y="4" width="112" height="112" rx="34"/></clipPath>
+            <filter id="svGlow" x="-30%" y="-30%" width="160%" height="160%">
+              <feGaussianBlur stdDeviation="2.4" result="b"/>
+              <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+            </filter>
+          </defs>
+          <rect x="4" y="4" width="112" height="112" rx="34" fill="url(#svTile)"/>
+          <ellipse cx="60" cy="-6" rx="82" ry="58" fill="url(#svGloss)" clip-path="url(#svClip)"/>
+          <rect x="4" y="4" width="112" height="112" rx="34" fill="none" stroke="url(#svRim)" stroke-width="1.6"/>
+          <path d="M34 22H86a16 16 0 0 1 16 16V68a16 16 0 0 1-16 16H58L40 100V84H34a16 16 0 0 1-16-16V38a16 16 0 0 1 16-16Z" fill="rgba(180,215,255,.10)" stroke="rgba(220,238,255,.6)" stroke-width="2.4" stroke-linejoin="round"/>
+          <path class="s" pathLength="1" d="M80 40C70 32 44 32 44 46C44 58 76 52 76 64C76 76 48 76 40 68" fill="none" stroke="url(#svSwipe)" stroke-width="8.5" stroke-linecap="round" filter="url(#svGlow)"/>
+          <circle class="dot" cx="91" cy="34" r="3.6" fill="#d9f4ff"/>
+        </svg>
+      </div>
+    </div>
+    <h1 class="word">Svipe</h1>
+    <p class="tag">Сообщения со скоростью свайпа</p>
+  </section>
+
+  <section class="panel glass" aria-label="Начало работы">
+    <div class="slider" id="slider" role="button" tabindex="0" aria-label="Начать. Свайпните вправо или нажмите Enter">
+      <span class="lbl">Свайпните, чтобы начать</span>
+      <span class="handle" id="handle">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </span>
+    </div>
+    <button class="btn glass" id="loginBtn" type="button">У меня уже есть аккаунт</button>
+    <p class="legal">Продолжая, вы соглашаетесь с условиями использования и политикой конфиденциальности.</p>
+  </section>
+</main>
+
+<!-- ===== главная: чаты и настройки ===== -->
+<div class="app" id="app" hidden>
+  <aside class="side glass" id="side">
+    <header class="side-head">
+      <h2 id="sideTitle">Чаты</h2>
+      <button class="icon-btn" id="newChatBtn" type="button" aria-label="Новый чат">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>
+      </button>
+    </header>
+
+    <div class="pane" id="paneChats">
+      <label class="search">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+        <input id="search" type="search" placeholder="Поиск по чатам" autocomplete="off" aria-label="Поиск по чатам">
+      </label>
+      <ul class="list" id="list" aria-label="Список чатов"></ul>
+    </div>
+
+    <div class="pane scroll" id="paneSettings" hidden>
+      <section class="card me">
+        <div id="setAvatar"></div>
+        <div class="who"><strong id="setName"></strong><span id="setEmail"></span></div>
+      </section>
+
+      <form class="card form" id="profileForm" novalidate>
+        <h3>Профиль</h3>
+        <label class="field"><span>Имя</span><input id="pfName" maxlength="40" autocomplete="name"></label>
+        <label class="field"><span>Имя пользователя</span><input id="pfUser" maxlength="20" autocomplete="username" autocapitalize="none" spellcheck="false" placeholder="username"></label>
+        <label class="field"><span>О себе</span><input id="pfBio" maxlength="140" placeholder="Пара слов о себе"></label>
+        <p class="err" id="pfMsg" role="status"></p>
+        <button class="btn primary" type="submit">Сохранить</button>
+      </form>
+
+      <section class="card">
+        <h3>Оформление</h3>
+        <div class="row">
+          <span id="lblAccent">Акцентный цвет</span>
+          <div class="swatches" id="swatches" role="group" aria-labelledby="lblAccent">
+            <button type="button" class="sw" data-accent="blue" aria-label="Синий"></button>
+            <button type="button" class="sw" data-accent="cyan" aria-label="Голубой"></button>
+            <button type="button" class="sw" data-accent="violet" aria-label="Фиолетовый"></button>
+            <button type="button" class="sw" data-accent="mint" aria-label="Мятный"></button>
+          </div>
+        </div>
+        <div class="row col">
+          <label for="blur">Размытие стекла <output id="blurOut"></output></label>
+          <input type="range" id="blur" min="0" max="100" step="1">
+        </div>
+        <div class="row">
+          <span id="lblOrbs">Анимация фона</span>
+          <button type="button" class="switch" id="swOrbs" role="switch" aria-checked="true" aria-labelledby="lblOrbs"></button>
+        </div>
+      </section>
+
+      <section class="card">
+        <h3>Уведомления</h3>
+        <div class="row">
+          <span id="lblSound">Звук новых сообщений</span>
+          <button type="button" class="switch" id="swSound" role="switch" aria-checked="true" aria-labelledby="lblSound"></button>
+        </div>
+      </section>
+
+      <section class="card">
+        <h3>Аккаунт</h3>
+        <button class="btn plain" id="logout" type="button">Выйти</button>
+        <button class="btn link" id="logoutAll" type="button">Выйти на всех устройствах</button>
+      </section>
+      <p class="ver">Svipe 1.0</p>
+    </div>
+
+    <nav class="tabbar" id="tabbar" data-tab="chats" aria-label="Разделы">
+      <span class="tab-ind" aria-hidden="true"></span>
+      <button class="tab on" type="button" data-tab="chats">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 5h14a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2h-7l-5 4v-4H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2Z"/></svg>
+        <span>Чаты</span><i class="dot" id="tabDot" hidden></i>
+      </button>
+      <button class="tab" type="button" data-tab="settings">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1Z"/></svg>
+        <span>Настройки</span>
+      </button>
+    </nav>
+  </aside>
+
+  <section class="main glass" id="main">
+    <div class="empty" id="empty">
+      <img src="logo.svg" alt="" width="96" height="96">
+      <p>Выберите чат слева или начните новый</p>
+    </div>
+
+    <div class="chat-view" id="chatView" hidden>
+      <header class="chat-head">
+        <button class="icon-btn back" id="backBtn" type="button" aria-label="К списку чатов">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 5-7 7 7 7"/></svg>
+        </button>
+        <div id="chAvatar"></div>
+        <div class="who"><strong id="chTitle"></strong><span id="chSub"></span></div>
+        <div class="head-actions" id="headCall" hidden>
+          <button class="icon-btn" id="callVoice" type="button" aria-label="Голосовой звонок">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2Z"/></svg>
+          </button>
+          <button class="icon-btn" id="callVideo" type="button" aria-label="Видеозвонок">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="6.5" width="13" height="11" rx="3"/><path d="m15.5 11 6-3.5v9l-6-3.5"/></svg>
+          </button>
+        </div>
+      </header>
+      <div class="msgs" id="msgs" role="log" aria-live="polite"></div>
+      <form class="composer" id="composer">
+        <textarea id="msgInput" rows="1" maxlength="4000" placeholder="Сообщение" aria-label="Сообщение"></textarea>
+        <button class="send" type="submit" aria-label="Отправить">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+        </button>
+      </form>
+      <p class="ro" id="roNote" hidden>В этот чат нельзя писать.</p>
+    </div>
+  </section>
+</div>
+
+<!-- ===== шторка входа ===== -->
+<div class="wrap" id="authWrap" hidden>
+  <div class="scrim"></div>
+  <section class="sheet glass" role="dialog" aria-modal="true" aria-labelledby="authTitle">
+    <button class="x" type="button" aria-label="Закрыть">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg>
+    </button>
+
+    <div class="step" id="stepEmail">
+      <h2 id="authTitle">Создайте аккаунт</h2>
+      <p class="sub" id="authSub"></p>
+      <form class="form" id="authForm" novalidate>
+        <label class="field" id="nameField"><span>Имя</span>
+          <input id="name" type="text" autocomplete="given-name" placeholder="Как вас зовут" maxlength="40">
+        </label>
+        <label class="field"><span>E-mail</span>
+          <input id="email" type="email" inputmode="email" autocomplete="email" autocapitalize="none" spellcheck="false" placeholder="name@mail.ru">
+        </label>
+        <p class="err" id="err" role="alert"></p>
+        <button class="btn primary glass" id="sendBtn" type="submit">Получить код</button>
+        <button class="btn link" id="switchMode" type="button"></button>
+      </form>
+    </div>
+
+    <div class="step" id="stepCode" hidden>
+      <h2>Введите код</h2>
+      <p class="sub">6 цифр для адреса <strong id="codeFor"></strong></p>
+      <div class="code" id="code">
+        <input type="text" inputmode="numeric" autocomplete="one-time-code" maxlength="1" aria-label="Цифра 1">
+        <input type="text" inputmode="numeric" maxlength="1" aria-label="Цифра 2">
+        <input type="text" inputmode="numeric" maxlength="1" aria-label="Цифра 3">
+        <input type="text" inputmode="numeric" maxlength="1" aria-label="Цифра 4">
+        <input type="text" inputmode="numeric" maxlength="1" aria-label="Цифра 5">
+        <input type="text" inputmode="numeric" maxlength="1" aria-label="Цифра 6">
+      </div>
+      <p class="err" id="codeErr" role="alert"></p>
+      <p class="note" id="codeHint"></p>
+      <button class="btn link" id="resend" type="button" disabled></button>
+      <button class="btn link" id="back" type="button">Изменить e-mail</button>
+    </div>
+  </section>
+</div>
+
+<!-- ===== шторка нового чата ===== -->
+<div class="wrap" id="newWrap" hidden>
+  <div class="scrim"></div>
+  <section class="sheet glass" role="dialog" aria-modal="true" aria-labelledby="ncTitle">
+    <button class="x" type="button" aria-label="Закрыть">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg>
+    </button>
+    <h2 id="ncTitle">Новый чат</h2>
+    <p class="sub">Введите e-mail или @username человека, который уже есть в Svipe.</p>
+    <form class="form" id="ncForm" novalidate>
+      <label class="field"><span>E-mail или @username</span>
+        <input id="ncQuery" type="text" autocomplete="off" autocapitalize="none" spellcheck="false" placeholder="name@mail.ru или @name">
+      </label>
+      <p class="err" id="ncErr" role="alert"></p>
+      <button class="btn primary glass" type="submit">Начать чат</button>
+    </form>
+  </section>
+</div>
+
+<div class="call" id="call" hidden role="dialog" aria-modal="true" aria-label="Звонок">
+  <div class="scrim"></div>
+  <section class="call-card glass">
+    <video id="remoteV" autoplay playsinline></video>
+    <div class="call-info">
+      <div class="call-rings" id="callAv"></div>
+      <h3 id="callName"></h3>
+      <p id="callStatus" aria-live="polite"></p>
+    </div>
+    <video id="localV" autoplay playsinline muted></video>
+    <div class="call-ctrl">
+      <button class="cbtn" id="cMic" type="button" aria-pressed="false" aria-label="Микрофон">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/><path class="slash" d="M4 4l16 16"/></svg>
+      </button>
+      <button class="cbtn" id="cCam" type="button" aria-pressed="false" aria-label="Камера">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="6.5" width="13" height="11" rx="3"/><path d="m15.5 11 6-3.5v9l-6-3.5"/><path class="slash" d="M4 4l16 16"/></svg>
+      </button>
+      <button class="cbtn end" id="cEnd" type="button" aria-label="Завершить звонок">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="transform:rotate(135deg)"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2Z"/></svg>
+      </button>
+      <button class="cbtn end" id="cDecline" type="button" aria-label="Отклонить звонок">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="transform:rotate(135deg)"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2Z"/></svg>
+      </button>
+      <button class="cbtn acc" id="cAccept" type="button" aria-label="Принять звонок">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2Z"/></svg>
+      </button>
+    </div>
+  </section>
+</div>
+
+<div class="toast glass" id="toast" role="status" hidden></div>
+
+<noscript><p style="position:relative;z-index:5;padding:24px;text-align:center">Для работы Svipe нужен включённый JavaScript.</p></noscript>
+<script src="app.js"></script>
+</body>
+</html>
